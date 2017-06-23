@@ -1,5 +1,12 @@
-var path = require('path')
-var webpack = require('webpack')
+/* eslint-env node */
+/* eslint-disable import/no-nodejs-modules */
+const path = require("path")
+
+const webpack = require("webpack")
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 module.exports = {
   entry: './src/main.js',
@@ -10,6 +17,15 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src'), resolve('test')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',

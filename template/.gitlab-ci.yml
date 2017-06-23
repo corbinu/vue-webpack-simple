@@ -1,0 +1,11 @@
+test:
+  script:
+  - npm install
+
+production:
+  type: deploy
+  script:
+  - npm install
+  - npm publish
+  only:
+  - tags
